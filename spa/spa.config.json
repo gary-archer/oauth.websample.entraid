@@ -1,6 +1,6 @@
 {
     "app": {
-        "apiBaseUrl":             "https://api.authsamples-dev.com/api"
+        "apiBaseUrl":             "https://api.authsamples-dev.com:446/api"
     },
     "oauth": {
         "authority":              "https://login.microsoftonline.com/7f071fbc-8bf2-4e61-bb48-dabd8e2f5b5a/v2.0",
