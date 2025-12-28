@@ -59,16 +59,10 @@ Finally, configure [Browser SSL Trust](https://github.com/gary-archer/oauth.blog
 Ensure that Node.js 24+ is installed, then build and run the SPA and API:
 
 ```bash
-./build.sh && ./run.sh
+./start.sh
 ```
 
 The system browser runs and you can sign in with your own Entra ID user accounts.
-
-## Problem Areas
-
-- The initial SPA does not handle tokens in line with 2021 security recommendations.
-- The SPA also demonstrates some usability problems with iframe-based silent token renewal.
-- The [Final SPA Code Sample](https://github.com/gary-archer/oauth.websample.final) solves these problems but requires a more complex flow.
 
 ## Further Information
 
@@ -85,3 +79,9 @@ The system browser runs and you can sign in with your own Entra ID user accounts
 * The SPA uses the [oidc-client-ts](https://github.com/authts/oidc-client-ts) library to implement OpenID Connect.
 * The API uses the [jose](https://github.com/panva/jose) library to validate JWT access tokens.
 * Microsoft Entra ID is the default authorization server for the SPA and API.
+
+## Limitations
+
+- The SPA uses tokens in the browser, which is against 2021 security best practices.
+- The SPA uses the original iframe-based silent token renewal which has some usability problems.
+- The [Final SPA Code Sample](https://github.com/gary-archer/oauth.websample.final) solves these problems but requires a more complex flow.

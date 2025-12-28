@@ -1,10 +1,8 @@
 #!/bin/bash
 
-####################################################################
-# A script to spin up the code sample, to be run from a terminal
-# Open source libraries are used by the SPA and API
-# Azure Active Directory is used as the default Authorization Server
-####################################################################
+###################################################################################
+# Run the OAuth-secured SPA and API, which use tokens from the authorization server
+###################################################################################
 
 #
 # Get the platform
@@ -37,19 +35,19 @@ fi
 #
 if [ "$PLATFORM" == 'MACOS' ]; then
 
-  open -a Terminal ./spa/run.sh
-  open -a Terminal ./api/run.sh
+  open -a Terminal ./spa/start.sh
+  open -a Terminal ./api/start.sh
 
 elif [ "$PLATFORM" == 'WINDOWS' ]; then
 
   GIT_BASH="C:\Program Files\Git\git-bash.exe"
-  "$GIT_BASH" -c ./spa/run.sh &
-  "$GIT_BASH" -c ./api/run.sh &
+  "$GIT_BASH" -c ./spa/start.sh &
+  "$GIT_BASH" -c ./api/start.sh &
 
 elif [ "$PLATFORM" == 'LINUX' ]; then
 
-  gnome-terminal -- ./spa/run.sh
-  gnome-terminal -- ./api/run.sh
+  gnome-terminal -- ./spa/start.sh
+  gnome-terminal -- ./api/start.sh
 fi
 
 #
@@ -76,7 +74,9 @@ while [ ! -f "$SPA_BUNDLE" ]; do
 done
 
 #
-# Run the SPA in the default browser
+# Run the SPA in the default browser, then sign in with these credentials:
+# - guestuser@example.com
+# - Password1
 #
 if [ "$PLATFORM" == 'MACOS' ]; then
   open "$SPA_URL"
