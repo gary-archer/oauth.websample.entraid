@@ -75,7 +75,8 @@ The system browser runs and you can sign in with your own Entra ID user accounts
 
 ## Infrastructure
 
-* Express is used as the HTTP server for both the API and the SPA's web static content.
+* Express is used as the HTTP server for the secured API.
+* The Webpack development server is used to serve the SPA's static content.
 * The SPA uses the [oidc-client-ts](https://github.com/authts/oidc-client-ts) library to implement OpenID Connect.
 * The API uses the [jose](https://github.com/panva/jose) library to validate JWT access tokens.
 * Microsoft Entra ID is the default authorization server for the SPA and API.
@@ -84,4 +85,4 @@ The system browser runs and you can sign in with your own Entra ID user accounts
 
 - The SPA uses tokens in the browser, which is against 2021 security best practices.
 - The SPA uses the original iframe-based silent token renewal which has some usability problems.
-- The [Final SPA Code Sample](https://github.com/gary-archer/oauth.websample.final) solves these problems but requires a more complex flow.
+- The [Final SPA Code Sample](https://github.com/gary-archer/oauth.websample.final) solves these problems.
