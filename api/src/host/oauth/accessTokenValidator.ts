@@ -64,7 +64,6 @@ export class AccessTokenValidator {
                 'The token does not contain sufficient scope for this API');
         }
 
-        console.log(claims);
         return claims;
     }
 }

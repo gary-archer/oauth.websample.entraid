@@ -16,7 +16,7 @@ const prodConfig: webpack.Configuration = {
     plugins:[
         new webpack.DefinePlugin({
             IS_DEBUG: 'false',
-        })
+        }),
     ]
 };
 

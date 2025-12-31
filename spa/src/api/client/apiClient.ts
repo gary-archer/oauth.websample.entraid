@@ -6,6 +6,7 @@ import {AxiosUtils} from '../../plumbing/utilities/axiosUtils';
 import {ApiUserInfo} from '../entities/apiUserInfo';
 import {Company} from '../entities/company';
 import {CompanyTransactions} from '../entities/companyTransactions';
+import { OAuthUserInfo } from '../entities/oauthUserInfo';
 
 /*
  * Logic related to making API calls
@@ -45,9 +46,15 @@ export class ApiClient {
      * The SPA's access token does not allow us to get user info from the authorization server
      * Instead we route via the API which gets the OAuth user info using a different access token
      */
-    public async getOAuthUserInfo(): Promise<ApiUserInfo> {
+    public async getOAuthUserInfo(): Promise<OAuthUserInfo> {
 
-        return await this.callApi('oauthuserinfo', 'GET') as ApiUserInfo;
+        const data = await this.callApi('oauthuserinfo', 'GET');
+        const givenName = data.given_name || '';
+        const familyName = data.family_name || '';
+        return {
+            givenName,
+            familyName,
+        };
     }
 
     /*

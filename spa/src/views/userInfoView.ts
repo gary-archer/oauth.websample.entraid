@@ -1,6 +1,7 @@
 import mustache from 'mustache';
 import {ApiClient} from '../api/client/apiClient';
 import {ApiUserInfo} from '../api/entities/apiUserInfo';
+import {OAuthUserInfo} from '../api/entities/oauthUserInfo';
 import {DomUtils} from './domUtils';
 
 /*
@@ -8,39 +9,56 @@ import {DomUtils} from './domUtils';
  */
 export class UserInfoView {
 
-    public async load(apiClient: ApiClient): Promise<void> {
+    private oauthUserInfo: OAuthUserInfo | null;
+    private apiUserInfo: ApiUserInfo | null;
 
-        // Get information from the OAuth user info endpoint
-        const oauthUserInfo = await apiClient.getOAuthUserInfo();
+    public constructor() {
+        this.oauthUserInfo = null;
+        this.apiUserInfo = null;
+    }
 
-        // Get information from the API's own user attributes
-        const apiUserInfo = await apiClient.getApiUserInfo();
+    /*
+     * Run the user info view and get data if required
+     */
+    public async run(apiClient: ApiClient, forceReload: boolean): Promise<void> {
 
-        if (oauthUserInfo && apiUserInfo) {
-
-            // Build a view model from the data
-            const viewModel = {
-                userName: this.getUserNameForDisplay(oauthUserInfo),
-                title: this.getUserTitle(apiUserInfo),
-                regions: this.getUserRegions(apiUserInfo),
-            };
-
-            // Form the template
-            const htmlTemplate =
-                `<div class='text-end mx-auto'>
-                    <div class='fw-bold basictooltip'>{{userName}}
-                        <div class='basictooltiptext'>
-                            <small>{{title}}</small>
-                            <br />
-                            <small>{{regions}}</small>
-                        </div>
-                    </div>
-                </div>`;
-
-            // Render results
-            const html = mustache.render(htmlTemplate, viewModel);
-            DomUtils.html('#username', html);
+        if (!this.oauthUserInfo || !this.apiUserInfo && forceReload) {
+            this.oauthUserInfo = await apiClient.getOAuthUserInfo();
+            this.apiUserInfo = await apiClient.getApiUserInfo();
         }
+
+        if (this.oauthUserInfo && this.apiUserInfo) {
+            this.renderData(this.oauthUserInfo, this.apiUserInfo);
+        }
+    }
+
+    /*
+     * Render user info
+     */
+    private renderData(oauthUserInfo: OAuthUserInfo, apiUserInfo: ApiUserInfo) {
+
+        // Build a view model from the data
+        const viewModel = {
+            userName: this.getUserNameForDisplay(oauthUserInfo),
+            title: this.getUserTitle(apiUserInfo),
+            regions: this.getUserRegions(apiUserInfo),
+        };
+
+        // Form the template
+        const htmlTemplate =
+            `<div class='text-end mx-auto'>
+                <div class='fw-bold basictooltip'>{{userName}}
+                    <div class='basictooltiptext'>
+                        <small>{{title}}</small>
+                        <br />
+                        <small>{{regions}}</small>
+                    </div>
+                </div>
+            </div>`;
+
+        // Render results
+        const html = mustache.render(htmlTemplate, viewModel);
+        DomUtils.html('#username', html);
     }
 
     /*
@@ -53,13 +71,13 @@ export class UserInfoView {
     /*
      * Get a name string using OAuth user info
      */
-    private getUserNameForDisplay(oauthUserInfo: any): string {
+    private getUserNameForDisplay(oauthUserInfo: OAuthUserInfo): string {
 
-        if (!oauthUserInfo['given_name'] || !oauthUserInfo['family_name']) {
+        if (!oauthUserInfo.givenName || !oauthUserInfo.familyName) {
             return '';
         }
 
-        return `${oauthUserInfo['given_name']} ${oauthUserInfo['family_name']}`;
+        return `${oauthUserInfo.givenName} ${oauthUserInfo.familyName}`;
     }
 
     /*
