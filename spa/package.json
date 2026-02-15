@@ -14,7 +14,7 @@
     "build": "NODE_OPTIONS='--import tsx' npx webpack --config webpack/webpack.config.prod.ts"
   },
   "dependencies": {
-    "axios": "^1.13.2",
+    "axios": "^1.13.5",
     "mustache": "^4.2.0",
     "oidc-client-ts": "^3.4.1"
   },
