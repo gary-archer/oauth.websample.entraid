@@ -18,11 +18,14 @@ export class ErrorCodes {
     // A problem due to an invalid scope
     public static readonly insufficientScope = 'insufficient_scope';
 
-    // The attempt to get a graph token from the token endpoint failed
-    public static readonly graphTokenExchangeError = 'graph_token_exchange';
+    // An error making a fetch request
+    public static readonly connectionError = 'connection_error';
 
-    // A problem calling the user info endpoint
-    public static readonly userinfoFailure = 'userinfo_failure';
+    // An error receiving data as JSON
+    public static readonly dataError = 'data_error';
+
+    // An error response from a remote endpoint
+    public static readonly responseError = 'response_error';
 
     // A problem reading claims from payloads
     public static readonly claimsFailure = 'claims_failure';

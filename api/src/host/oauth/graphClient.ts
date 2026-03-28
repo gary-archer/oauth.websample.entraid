@@ -1,5 +1,3 @@
-import axios, {AxiosRequestConfig} from 'axios';
-import {URLSearchParams} from 'url';
 import {OAuthConfiguration} from '../configuration/oauthConfiguration.js';
 import {ErrorFactory} from '../errors/errorFactory.js';
 import {HttpProxy} from '../utilities/httpProxy.js';
@@ -43,26 +41,33 @@ export class GraphClient {
             formData.append('assertion', accessToken);
             formData.append('scope', this.configuration.graphClient.scope);
             formData.append('requested_token_use', 'on_behalf_of');
+            console.log(formData.toString());
 
             const options = {
-                url: this.configuration.tokenEndpoint,
                 method: 'POST',
-                data: formData,
                 headers: {
                     'content-type': 'application/x-www-form-urlencoded',
-                    'accept': 'application/json',
+                    'authorization': `Bearer ${accessToken}`,
                 },
-                httpsAgent: this.httpProxy.getAgent(),
-            };
+                body: formData.toString(),
+                dispatcher: this.httpProxy.getDispatcher() || undefined,
+            } as RequestInit;
 
-            const response = await axios.request(options as AxiosRequestConfig) as any;
-            return response.data.access_token || '';
+            const response = await fetch(this.configuration.tokenEndpoint, options);
+            if (response.ok) {
+                const tokenData = await response.json() as any;
+                return tokenData.access_token;
+            }
+
+            throw await ErrorFactory.getFromFetchResponseError(response, 'Graph Token Endpoint');
 
         } catch (e: any) {
 
             // Report Graph errors clearly
-            throw ErrorFactory.fromUserInfoTokenGrantError(e, this.configuration.tokenEndpoint);
+            throw ErrorFactory.getFromFetchError(e, this.configuration.tokenEndpoint, 'Graph Token Endpoint');
         }
+
+        return '';
     }
 
     /*
@@ -73,22 +78,25 @@ export class GraphClient {
         try {
 
             const options = {
-                url: this.configuration.userInfoEndpoint,
                 method: 'GET',
                 headers: {
-                    'accept': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`,
+                    'content-type': 'application/x-www-form-urlencoded',
+                    'authorization': `Bearer ${accessToken}`,
                 },
-                httpsAgent: this.httpProxy.getAgent(),
-            };
+                dispatcher: this.httpProxy.getDispatcher() || undefined,
+            } as RequestInit;
 
-            const response = await axios.request(options as AxiosRequestConfig);
-            return response.data as any;
+            const response = await fetch(this.configuration.userInfoEndpoint, options);
+            if (response.ok) {
+                return await response.json() as any;
+            }
+
+            throw await ErrorFactory.getFromFetchResponseError(response, 'Graph UserInfo Endpoint');
 
         } catch (e: any) {
 
             // Report user info errors clearly
-            throw ErrorFactory.fromUserInfoError(e, this.configuration.userInfoEndpoint);
+            throw ErrorFactory.getFromFetchError(e, this.configuration.tokenEndpoint, 'Graph UserInfo Endpoint');
         }
     }
 }

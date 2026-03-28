@@ -20,7 +20,7 @@
         "claimsCacheTimeToLiveMinutes":  15,
         "graphClient": {
             "clientId":                  "552b475c-471d-43a1-9dfe-f6b895931110",
-            "clientSecret":              "VFu8Q~i~l3Ysiji~jvBgmDphm_IhDLuuOTapkaCe",
+            "clientSecret":              "JuS8Q~F.iSXLvevBCM4S~UOqMFPofOgc32Uuaap8",
             "scope":                     "openid profile"
         }
     }
