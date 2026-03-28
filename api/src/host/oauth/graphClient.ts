@@ -1,3 +1,4 @@
+import {fetch, RequestInit} from 'undici';
 import {OAuthConfiguration} from '../configuration/oauthConfiguration.js';
 import {ErrorFactory} from '../errors/errorFactory.js';
 import {HttpProxy} from '../utilities/httpProxy.js';
@@ -41,9 +42,8 @@ export class GraphClient {
             formData.append('assertion', accessToken);
             formData.append('scope', this.configuration.graphClient.scope);
             formData.append('requested_token_use', 'on_behalf_of');
-            console.log(formData.toString());
 
-            const options = {
+            const options: RequestInit = {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/x-www-form-urlencoded',
@@ -51,7 +51,7 @@ export class GraphClient {
                 },
                 body: formData.toString(),
                 dispatcher: this.httpProxy.getDispatcher() || undefined,
-            } as RequestInit;
+            };
 
             const response = await fetch(this.configuration.tokenEndpoint, options);
             if (response.ok) {
@@ -77,14 +77,14 @@ export class GraphClient {
 
         try {
 
-            const options = {
+            const options: RequestInit = {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/x-www-form-urlencoded',
                     'authorization': `Bearer ${accessToken}`,
                 },
                 dispatcher: this.httpProxy.getDispatcher() || undefined,
-            } as RequestInit;
+            };
 
             const response = await fetch(this.configuration.userInfoEndpoint, options);
             if (response.ok) {

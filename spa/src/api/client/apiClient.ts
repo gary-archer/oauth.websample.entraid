@@ -4,7 +4,7 @@ import {OAuthClient} from '../../plumbing/oauth/oauthClient';
 import {ApiUserInfo} from '../entities/apiUserInfo';
 import {Company} from '../entities/company';
 import {CompanyTransactions} from '../entities/companyTransactions';
-import { OAuthUserInfo } from '../entities/oauthUserInfo';
+import {OAuthUserInfo} from '../entities/oauthUserInfo';
 
 /*
  * Logic related to making API calls
@@ -134,20 +134,20 @@ export class ApiClient {
 
         try {
 
-            const options = {
+            const options: RequestInit = {
                 method,
-                data: dataToSend,
+                body: dataToSend,
                 headers: {
                     'Authorization': `Bearer ${accessToken}`,
                 },
-            } as RequestInit;
+            };
 
             const response = await fetch(url, options);
             if (response.ok) {
                 return await response.json();
             }
 
-            throw await ErrorFactory.getFromFetchResponseError(response, 'web API');
+            throw await ErrorFactory.getFromApiResponseError(response);
 
         } catch (e: any) {
             throw ErrorFactory.getFromFetchError(e, url, 'web API');
