@@ -67,8 +67,6 @@ export class GraphClient {
             // Report Graph errors clearly
             throw ErrorFactory.getFromFetchError(e, this.configuration.tokenEndpoint, 'Graph Token Endpoint');
         }
-
-        return '';
     }
 
     /*
