@@ -46,6 +46,7 @@ export class GraphClient {
             const options: RequestInit = {
                 method: 'POST',
                 headers: {
+                    'accept': 'application/json',
                     'content-type': 'application/x-www-form-urlencoded',
                     'authorization': `Bearer ${accessToken}`,
                 },
@@ -80,6 +81,7 @@ export class GraphClient {
             const options: RequestInit = {
                 method: 'GET',
                 headers: {
+                    'accept': 'application/json',
                     'content-type': 'application/x-www-form-urlencoded',
                     'authorization': `Bearer ${accessToken}`,
                 },
