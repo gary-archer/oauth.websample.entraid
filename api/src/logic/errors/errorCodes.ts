@@ -18,14 +18,14 @@ export class ErrorCodes {
     // A problem due to an invalid scope
     public static readonly insufficientScope = 'insufficient_scope';
 
-    // An error making a fetch request
+    // A general fetch error
+    public static readonly fetchError = 'fetch_error';
+
+    // A connection error making a fetch request
     public static readonly connectionError = 'connection_error';
 
-    // An error receiving data as JSON
+    // A data parsing error
     public static readonly dataError = 'data_error';
-
-    // An error response from a remote endpoint
-    public static readonly responseError = 'response_error';
 
     // A problem reading claims from payloads
     public static readonly claimsFailure = 'claims_failure';
