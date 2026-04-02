@@ -123,7 +123,7 @@ export class ErrorFactory {
             if (data) {
 
                 // Account for Graph token endpoint and Graph user info error responses
-                errorCode = data.error || data.code || ErrorCodes.responseError;
+                errorCode = data.error || data.code || ErrorCodes.fetchError;
                 details = data.error_description || data.message || '';
             }
 

@@ -1,5 +1,5 @@
 import {Response} from 'express';
-import {ClientError} from '../../logic/errors/clientError';
+import {ClientError} from '../../logic/errors/clientError.js';
 
 /*
  * Helper methods to write the response
