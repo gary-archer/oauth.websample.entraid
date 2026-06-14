@@ -75,7 +75,6 @@ The system browser runs and you can sign in with your own Entra ID user accounts
 
 ## Infrastructure
 
-<<<<<<< HEAD
 * Express is used as the HTTP server for the secured API and to serve the SPA's static content.
 * The SPA uses the [oidc-client-ts](https://github.com/authts/oidc-client-ts) library to implement OpenID Connect.
 * The API uses the [jose](https://github.com/panva/jose) library to validate JWT access tokens.
