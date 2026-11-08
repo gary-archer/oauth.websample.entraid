@@ -30,17 +30,18 @@ You could configure all of the settings and then update these configuration file
 
 ## Local Development Quick Start
 
-To run the code sample locally you must configure some infrastructure before you run the code.
+The SPA and API use [Real World OAuth Development URLs](https://github.com/gary-archer/oauth.blog/blob/master/public/posts/developer-ssl-setup.mdx#real-world-oauth-development-urls) on a local computer.  
+You must use admin permissions to configure infrastructure before you run the code.  
 
-### Configure DNS and SSL
+### Infrastructure Setup
 
-Configure custom development domains by adding these DNS entries to your hosts file:
+Add DNS entries to your `/etc/hosts` file:
 
 ```bash
 127.0.0.1 localhost www.authsamples-dev.com api.authsamples-dev.com
 ```
 
-Install OpenSSL 3+ if required, create a secrets folder, then create development certificates:
+Make sure OpenSSL 3+ is installed, specify a secrets folder, then create development certificates:
 
 ```bash
 export SECRETS_FOLDER="$HOME/secrets"
@@ -48,15 +49,21 @@ mkdir -p "$SECRETS_FOLDER"
 ./certs/create.sh
 ```
 
-Finally, configure [Browser SSL Trust](https://github.com/gary-archer/oauth.blog/tree/master/public/posts/developer-ssl-setup.mdx#trust-a-root-certificate-in-browsers) for the SSL root certificate at this location:
+Configure [HTTPS Trust](https://github.com/gary-archer/oauth.blog/blob/master/public/posts/developer-ssl-setup.mdx#configure-operating-system-trust) for the SSL root certificate at the following location:
 
 ```text
 ./certs/authsamples-dev.ca.crt
 ```
 
+Ensure that Node.js 26+ is installed, then grant it access to listen on port 443:
+
+```bash
+sudo setcap 'cap_net_bind_service=+ep' $(which node)
+```
+
 ### Run the Code
 
-Ensure that Node.js 26+ is installed, then build and run the SPA and API:
+Then run the SPA and API, which does not require admin permissions:
 
 ```bash
 ./start.sh
