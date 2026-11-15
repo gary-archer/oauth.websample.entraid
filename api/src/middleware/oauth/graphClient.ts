@@ -1,7 +1,7 @@
 import {fetch, RequestInit} from 'undici';
-import {OAuthConfiguration} from '../configuration/oauthConfiguration.js';
+import {OAuthConfiguration} from '../../configuration/oauthConfiguration.js';
+import {HttpProxy} from '../../utilities/httpProxy.js';
 import {ErrorFactory} from '../errors/errorFactory.js';
-import {HttpProxy} from '../utilities/httpProxy.js';
 
 /*
  * The entry point for OAuth related operations

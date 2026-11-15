@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
-import {ClientError} from '../../logic/errors/clientError.js';
-import {ServerError} from '../../logic/errors/serverError.js';
+import {ClientError} from '../errors/clientError.js';
+import {ServerError} from '../errors/serverError.js';
 
 /*
  * The log entry for an individual API request

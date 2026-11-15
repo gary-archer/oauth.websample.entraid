@@ -1,5 +1,5 @@
-import {GraphClient} from '../../host/oauth/graphClient.js';
-import {ClaimsPrincipal} from '../entities/claims/claimsPrincipal.js';
+import {ClaimsPrincipal} from '../../middleware/claims/claimsPrincipal.js';
+import {GraphClient} from '../../middleware/oauth/graphClient.js';
 
 /*
  * The API provides two user info endpoints for the SPA

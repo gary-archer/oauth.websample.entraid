@@ -2,7 +2,8 @@ import {JWTPayload} from 'jose';
 import {ExtraClaims} from './extraClaims.js';
 
 /*
- * Our claims principal contains claims from the token and other sources
+ * Contains JWT claims from the access token and extra values from a secondary user record
+ * Provides a convenient object to inject into business logic, to make all user attributes available
  */
 export class ClaimsPrincipal {
 

@@ -1,6 +1,6 @@
 import {JWTPayload} from 'jose';
-import {ExtraClaims} from '../../logic/entities/claims/extraClaims.js';
 import {ClaimsReader} from './claimsReader.js';
+import {ExtraClaims} from './extraClaims.js';
 
 /*
  * Add extra claims that you cannot, or do not want to, manage in the authorization server

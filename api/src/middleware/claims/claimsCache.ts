@@ -1,6 +1,6 @@
 import NodeCache from 'node-cache';
-import {ExtraClaims} from '../../logic/entities/claims/extraClaims.js';
-import {OAuthConfiguration} from '../configuration/oauthConfiguration.js';
+import {OAuthConfiguration} from '../../configuration/oauthConfiguration.js';
+import {ExtraClaims} from './extraClaims.js';
 
 /*
  * A simple in memory claims cache for our API

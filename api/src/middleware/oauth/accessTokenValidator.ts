@@ -1,8 +1,8 @@
 import {JWTPayload, JWTVerifyOptions, jwtVerify} from 'jose';
-import {ClientError} from '../../logic/errors/clientError.js';
-import {ErrorCodes} from '../../logic/errors/errorCodes.js';
+import {OAuthConfiguration} from '../../configuration/oauthConfiguration.js';
 import {ClaimsReader} from '../claims/claimsReader.js';
-import {OAuthConfiguration} from '../configuration/oauthConfiguration.js';
+import {ClientError} from '../errors/clientError.js';
+import {ErrorCodes} from '../errors/errorCodes.js';
 import {ErrorFactory} from '../errors/errorFactory.js';
 import {JwksRetriever} from './jwksRetriever.js';
 

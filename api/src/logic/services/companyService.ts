@@ -1,9 +1,9 @@
-import { ClaimsReader } from '../../host/claims/claimsReader.js';
-import {ClaimsPrincipal} from '../entities/claims/claimsPrincipal.js';
+import {ClaimsPrincipal} from '../../middleware/claims/claimsPrincipal.js';
+import {ClaimsReader} from '../../middleware/claims/claimsReader.js';
+import {ClientError} from '../../middleware/errors/clientError.js';
+import {ErrorCodes} from '../../middleware/errors/errorCodes.js';
 import {Company} from '../entities/company.js';
 import {CompanyTransactions} from '../entities/companyTransactions.js';
-import {ClientError} from '../errors/clientError.js';
-import {ErrorCodes} from '../errors/errorCodes.js';
 import {CompanyRepository} from '../repositories/companyRepository.js';
 
 /*

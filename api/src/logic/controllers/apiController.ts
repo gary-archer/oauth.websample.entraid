@@ -1,24 +1,24 @@
 import {NextFunction, Request, Response} from 'express';
 import onHeaders from 'on-headers';
-import {ClaimsPrincipal} from '../../logic/entities/claims/claimsPrincipal.js';
-import {ClientError} from '../../logic/errors/clientError.js';
-import {ErrorCodes} from '../../logic/errors/errorCodes.js';
+import {Configuration} from '../../configuration/configuration.js';
 import {CompanyRepository} from '../../logic/repositories/companyRepository.js';
 import {CompanyService} from '../../logic/services/companyService.js';
 import {UserInfoService} from '../../logic/services/userInfoService.js';
-import {JsonFileReader} from '../../logic/utilities/jsonFileReader.js';
-import {ClaimsCache} from '../claims/claimsCache.js';
-import {ExtraClaimsProvider} from '../claims/extraClaimsProvider.js';
-import {Configuration} from '../configuration/configuration.js';
-import {ErrorFactory} from '../errors/errorFactory.js';
-import {ExceptionHandler} from '../errors/exceptionHandler.js';
-import {AccessTokenValidator} from '../oauth/accessTokenValidator.js';
-import {BearerToken} from '../oauth/bearerToken.js';
-import {GraphClient} from '../oauth/graphClient.js';
-import {JwksRetriever} from '../oauth/jwksRetriever.js';
-import {OAuthFilter} from '../oauth/oauthFilter.js';
-import {HttpProxy} from '../utilities/httpProxy.js';
-import {ResponseWriter} from '../utilities/responseWriter.js';
+import {ClaimsCache} from '../../middleware/claims/claimsCache.js';
+import {ClaimsPrincipal} from '../../middleware/claims/claimsPrincipal.js';
+import {ExtraClaimsProvider} from '../../middleware/claims/extraClaimsProvider.js';
+import {ClientError} from '../../middleware/errors/clientError.js';
+import {ErrorCodes} from '../../middleware/errors/errorCodes.js';
+import {ErrorFactory} from '../../middleware/errors/errorFactory.js';
+import {ExceptionHandler} from '../../middleware/errors/exceptionHandler.js';
+import {AccessTokenValidator} from '../../middleware/oauth/accessTokenValidator.js';
+import {BearerToken} from '../../middleware/oauth/bearerToken.js';
+import {GraphClient} from '../../middleware/oauth/graphClient.js';
+import {JwksRetriever} from '../../middleware/oauth/jwksRetriever.js';
+import {OAuthFilter} from '../../middleware/oauth/oauthFilter.js';
+import {HttpProxy} from '../../utilities/httpProxy.js';
+import {JsonFileReader} from '../../utilities/jsonFileReader.js';
+import {ResponseWriter} from '../../utilities/responseWriter.js';
 
 /*
  * A class to route API requests to business logic classes

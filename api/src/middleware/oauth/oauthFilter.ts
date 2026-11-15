@@ -1,9 +1,9 @@
 import {createHash} from 'crypto';
 import {Request} from 'express';
-import {ClaimsPrincipal} from '../../logic/entities/claims/claimsPrincipal.js';
-import {ClientError} from '../../logic/errors/clientError.js';
 import {ClaimsCache} from '../claims/claimsCache.js';
+import {ClaimsPrincipal} from '../claims/claimsPrincipal.js';
 import {ExtraClaimsProvider} from '../claims/extraClaimsProvider.js';
+import {ClientError} from '../errors/clientError.js';
 import {AccessTokenValidator} from './accessTokenValidator.js';
 import {BearerToken} from './bearerToken.js';
 
